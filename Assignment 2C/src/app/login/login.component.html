@@ -1,0 +1,53 @@
+<div class="login">
+  <div class="card">
+    <h1>LOGIN FORM</h1>
+    <form name="loginForm">
+      <div class="form-item">
+        <label for="uname">Username:</label><br />
+        <input #username type="text" id="input" name="username" /><br />
+      </div>
+      <div class="form-item">
+        <label for="email">Email:</label><br />
+        <input #email type="text" id="input" name="email" /><br />
+      </div>
+      <div class="form-item">
+        <label for="pass">Password:</label><br />
+        <input
+          #password
+          type="text"
+          id="input"
+          name="password"
+          type="password"
+        />
+      </div>
+      <div>
+        <button
+          class="button add"
+          type="button"
+          (click)="addUser(username.value, email.value, password.value)"
+        >
+          ADD
+        </button>
+      </div>
+    </form>
+    <hr class="divider" />
+    <ul style="list-style: none">
+      <li *ngFor="let user of users">
+        <div class="user-card">
+          <div class="details">
+            <fa-icon [icon]="faUser" style="font-size: 48px"></fa-icon>
+            <h2>{{ user["uname"] }}</h2>
+            <button
+              type="button"
+              value="Submit"
+              class="button remove"
+              (click)="removeUser(user)"
+            >
+              REMOVE
+            </button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
