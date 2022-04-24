@@ -5,8 +5,9 @@ const User = require("../models/user-model");
 router.post("/signup", async (req, res) => {
   const user = new User(req.body);
   try {
+    console.log(user);
     await user.save();
-    res.status(201).send({ list });
+    res.status(201).send({ user });
   } catch (e) {
     res.status(400).send(e);
   }
@@ -14,10 +15,12 @@ router.post("/signup", async (req, res) => {
 
 router.post("/signin", async (req, res) => {
   try {
-    const user = await User.findByCredentials(
-      req.body.email,
-      req.body.password
-    );
+    const user = await User.findOne({
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    console.log(user);
     res.status(201).send({ user });
   } catch (e) {
     res.status(400).send(e);
@@ -27,7 +30,8 @@ router.post("/signin", async (req, res) => {
 router.post("/delete", async (req, res) => {
   try {
     const user = await User.findByIdAndRemove(req.body.id);
-    res.status(201).send({ list });
+    console.log("User Deleted:", user);
+    res.status(201).send({ user });
   } catch (e) {
     res.status(400).send(e);
   }
@@ -38,7 +42,8 @@ router.post("/change-password", async (req, res) => {
     const user = await User.findByIdAndUpdate(req.body.id, {
       password: req.body.password,
     });
-    res.status(201).send({ list });
+    console.log("User Password Changed:", user);
+    res.status(201).send({ user });
   } catch (e) {
     res.status(400).send(e);
   }

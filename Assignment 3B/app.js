@@ -1,13 +1,11 @@
 const express = require("express");
-const listRouter = require("./src/routers/list-routes");
-// const productRouter = require("./src/routers/product-routes");
+const userRouter = require("./src/routers/user-routes");
 require("./src/db/mongoose");
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(listRouter);
-// app.use(productRouter);
+app.use(userRouter);
 
 module.exports = app;
